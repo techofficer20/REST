@@ -1,1 +1,19 @@
-<h1>Hello</h1>
+<h1>Musics in REST</h1>
+<h2>Musics</h2>
+<ul>
+  {% for music in musics %}
+  <li>{{ music }}</li>
+  {% endfor %}
+</ul>
+<h2>Singers</h2>
+<ul>
+  {% for singer in singers %}
+  <li>{{ singer }}</li>
+  {% endfor %}
+</ul>
+<h2>Genres</h2>
+<ul>
+  {% for genre in genres %}
+  <li>{{ genre }}</li>
+  {% endfor %}
+</ul>
