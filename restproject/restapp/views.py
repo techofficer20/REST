@@ -2,6 +2,27 @@ from django.shortcuts import render, redirect
 from .models import Music, Singer, Genre
 # Create your views here.
 
+from rest_framework import viewsets
+from .serializers import MusicSerializer, SingerSerializer, GenreSerializer
+
+class MusicView(viewsets.ModelViewSet):
+    queryset = Music.objects.all()
+    serializer_class = MusicSerializer
+    def perform_create(self, serializer):
+        serializer.save()
+
+class SingerView(viewsets.ModelViewSet):
+    queryset = Singer.objects.all()
+    serializer_class = SingerSerializer
+    def perform_create(self, serializer):
+        serializer.save()
+
+class GenreView(viewsets.ModelViewSet):
+    queryset = Genre.objects.all()
+    serializer_class = GenreSerializer
+    def perform_create(self, serializer):
+        serializer.save()
+
 def index_view(request):
     musics = Music.objects.all()
     singers = Singer.objects.all()
@@ -57,3 +78,8 @@ def update_view(request, pk):
         
         music.save()
         return redirect('/restapp/' + str(pk))
+
+def delete_view(request, pk):
+    music = Music.objects.get(id = pk)
+    music.delete()
+    return redirect('/restapp/')
